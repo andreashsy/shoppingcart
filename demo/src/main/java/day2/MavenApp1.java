@@ -1,10 +1,16 @@
 package day2;
 import java.io.Console;
+import java.io.File;
 public class MavenApp1 {
-    
-
 
     public static void main(String[] args) {
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+        if (args.length == 0) {
+            new File(System.getProperty("user.dir") + "\\db").mkdirs();
+        } else {
+            new File(System.getProperty("user.dir") + "\\" + args).mkdirs();
+        }
+        
         Cart cart = new Cart();
         System.out.println("Welcome to your shopping cart");
         Console cons = System.console();

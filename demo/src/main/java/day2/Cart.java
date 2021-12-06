@@ -3,7 +3,15 @@ package day2;
 import java.util.ArrayList;
 
 public class Cart {
-    ArrayList<String> cartItems = new ArrayList<>();
+    private ArrayList<String> cartItems; // = new ArrayList<>();
+
+    public Cart() {
+        cartItems = new ArrayList<>();
+    }
+
+    public ArrayList<String> getCartItems() {
+        return cartItems;
+    }
         
     public void cartAdd(String addlist) {
         if (addlist.indexOf(',') == -1) {
