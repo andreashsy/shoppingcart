@@ -21,9 +21,9 @@ public class AppTest
 
     @Test
     public void testDelete() {
-        Cart test_cardadd = new Cart();
-        test_cardadd.cartAdd("apple, banana, apple");
-        test_cardadd.cartDelete(1);
-        assertTrue(test_cardadd.numItems() == 1); 
+        Cart test_carddel = new Cart();
+        test_carddel.cartAdd("apple, banana, apple");
+        test_carddel.cartDelete(1);
+        assertTrue(test_carddel.numItems() == 1); 
     }
 }
