@@ -13,8 +13,12 @@ public class Cart {
         return cartItems;
     }
         
-    public void cartAdd(String addlist) {
-        if (addlist.indexOf(',') == -1) {
+    public void cartAdd(String additem) {
+        cartItems.add(additem);
+        System.out.println("Added " + additem);
+
+
+/*         if (addlist.indexOf(',') == -1) {
             if (cartItems.contains(addlist)) {
                 System.out.println("" + addlist + " is already in the list!");
             } else {
@@ -32,10 +36,18 @@ public class Cart {
                 }
             }
             
-        }
+        } */
 
     }
-    public void cartList() {
+    public void cartList(ArrayList<String> items) {
+        int idx = 1;
+        for (String i: items) {
+            
+            System.out.printf("" + idx + ".  " + i + "%n");
+            idx++;
+        }
+
+/*         System.out.println(cartItems);
         if (cartItems.size() > 0) {
             for (String i: cartItems) {
             int idx = 1 + cartItems.indexOf(i);
@@ -43,7 +55,7 @@ public class Cart {
             }
          } else {
             System.out.println("The list is empty");
-        }        
+        } */        
     }
     public void cartDelete(int d) {
         if (d > cartItems.size() || d <= 0) {

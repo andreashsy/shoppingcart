@@ -7,6 +7,7 @@ public class ShoppingCartDB {
     String currDir = System.getProperty("user.dir");
     Boolean isLoggedIn = false;
     String user = "";
+   
 
     public void login(String user) throws IOException {
         this.user = user;
@@ -31,14 +32,14 @@ public class ShoppingCartDB {
         }
     }
 
-    public void save() throws IOException{
+    public void save(String[] folder, ArrayList<String> cartItems) throws IOException{
         if (!isLoggedIn) {
             System.out.println("Please login first");
             return;
         }
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(currDir + "\\" + user + ".db"), "utf-8"))) {
-            ArrayList<String> saveItems = Cart.getCartItems();
-            for (String item: saveItems) {
+            writer.write("" + folder + "/" + user + ".db");
+            for (String item: cartItems) {
                 writer.write(item);
             }
             

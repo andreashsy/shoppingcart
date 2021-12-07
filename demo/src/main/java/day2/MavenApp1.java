@@ -14,15 +14,44 @@ public class MavenApp1 {
         Cart cart = new Cart();
         System.out.println("Welcome to your shopping cart");
         Console cons = System.console();
-        while (1 <= 2) {
+        mainloop: while (1 <= 2) {
             String input = cons.readLine("What do you want to do?");
-            if (input.equals("list")) {
-                cart.cartList();
-            } else if (input.startsWith("add ")) {
+
+            switch (input.trim().toLowerCase().split(" ")[0]) {
+                case "list":
+                if (cart.getCartItems().isEmpty()) {
+                    System.out.println("The cart is empty");
+                } else {
+                    cart.cartList(cart.getCartItems());
+                }
+                break;
+
+                case "add":
                 String k = input.split(" ")[0];
-                String k2 = input.replaceFirst(k, "");
-                cart.cartAdd(k2);
-            } else if (input.startsWith("delete ")) {
+                String k2 = input.replaceFirst(k, "").trim();
+
+                if (k2.indexOf(",") == -1) {
+                    if (cart.getCartItems().contains(k2)){
+                        System.out.println("" + k2 + " is already in the list!");
+                    } else {
+                        cart.cartAdd(k2);
+                    }
+                } else {
+                    String[] addlist = k2.split(",");
+                    for (String i: addlist) {
+                        String j = i.trim();
+                        if (cart.getCartItems().contains(j)){
+                            System.out.println("" + j + " is already in the list!");
+                        } else {
+                            cart.cartAdd(j);
+                        }
+
+                    }
+
+                }
+                break;
+
+                case "delete":
                 try {
                     int j = Integer.parseInt(input.split(" ")[1]);
                     cart.cartDelete(j);
@@ -30,11 +59,10 @@ public class MavenApp1 {
                     System.out.println("Please type the number");
                     continue;
                 }
-            } else if (input.split(" ")[0].contains("exit")) {
                 break;
-            } else {
-                System.out.println("Please try again. (List / Add <item 1, item 2, etc> / Delete <item number> / Exit)");
 
+                case "exit":
+                break mainloop;
             }
         }
         System.out.println("Program end");
