@@ -57,7 +57,9 @@
                 <mainClass>day2.MavenApp1</mainClass>
               </manifest>
             </archive>
-          </configuration>  
+ 
+
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
