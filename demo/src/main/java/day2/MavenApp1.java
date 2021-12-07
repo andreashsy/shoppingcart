@@ -6,6 +6,10 @@ public class MavenApp1 {
 
     public static void main(String[] args) throws IOException {
         String saveDir = "";
+        Cart cart = new Cart();
+        ShoppingCartDB scdb = new ShoppingCartDB();
+
+        // create db directory 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         if (args.length == 0) {
             saveDir = System.getProperty("user.dir") + "\\db";
@@ -15,12 +19,11 @@ public class MavenApp1 {
         System.out.println("Save Directory = " + saveDir);
         new File(saveDir).mkdirs();
         
-        Cart cart = new Cart();
-        ShoppingCartDB scdb = new ShoppingCartDB();
+        // welcome message and main working loop
         System.out.println("Welcome to your shopping cart");
         Console cons = System.console();
         mainloop: while (1 <= 2) {
-            String input = cons.readLine("What do you want to do?");
+            String input = cons.readLine("What do you want to do? ");
 
             switch (input.trim().toLowerCase().split(" ")[0]) {
                 case "list":
@@ -84,6 +87,10 @@ public class MavenApp1 {
 
                 case "exit":
                 break mainloop;
+
+                default:
+                System.out.println("Invalid Input. Try again");
+                break;
             }
         }
         System.out.println("Program end");
