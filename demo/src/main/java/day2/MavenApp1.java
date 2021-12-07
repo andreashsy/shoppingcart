@@ -1,17 +1,22 @@
 package day2;
 import java.io.Console;
 import java.io.File;
+import java.io.IOException;
 public class MavenApp1 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        String saveDir = "";
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         if (args.length == 0) {
-            new File(System.getProperty("user.dir") + "\\db").mkdirs();
+            saveDir = System.getProperty("user.dir") + "\\db";
         } else {
-            new File(System.getProperty("user.dir") + "\\" + args).mkdirs();
+            saveDir = System.getProperty("user.dir") + "\\" + args;
         }
+        System.out.println("Save Directory = " + saveDir);
+        new File(saveDir).mkdirs();
         
         Cart cart = new Cart();
+        ShoppingCartDB scdb = new ShoppingCartDB();
         System.out.println("Welcome to your shopping cart");
         Console cons = System.console();
         mainloop: while (1 <= 2) {
@@ -59,6 +64,22 @@ public class MavenApp1 {
                     System.out.println("Please type the number");
                     continue;
                 }
+                break;
+
+                case "login":
+                String[] li = scdb.login(input.split(" ")[1], saveDir);
+                for (String s: li) {
+                    cart.cartAdd(s);
+                }
+                cart.cartDelete(1);
+                break;
+
+                case "save":
+                scdb.save(cart.getCartItems(), saveDir, args);
+                break;
+
+                case "users":
+                scdb.users(saveDir);
                 break;
 
                 case "exit":
