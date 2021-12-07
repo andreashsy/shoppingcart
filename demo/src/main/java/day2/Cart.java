@@ -40,4 +40,9 @@ public class Cart {
     public int numItems() {
         return cartItems.size();
     }
+
+    public void clearCart() {
+        System.out.println("Clearing cart...");
+        cartItems = new ArrayList<>();
+    }
 }

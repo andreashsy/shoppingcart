@@ -70,11 +70,17 @@ public class MavenApp1 {
                 break;
 
                 case "login":
-                String[] li = scdb.login(input.split(" ")[1], saveDir);
-                for (String s: li) {
-                    cart.cartAdd(s);
+                if (input.split(" ").length <= 1) {
+                    System.out.println("No username");
+                    break;
                 }
-                cart.cartDelete(1);
+                String[] li = scdb.login(input.split(" ")[1], saveDir);
+                cart.clearCart();
+                for (int i = 1; i < li.length; i++) {
+                    cart.cartAdd(li[i]);
+                }
+                System.out.println("" + input.split(" ")[1] + ", your list contains the following items:");
+                cart.cartList(cart.getCartItems());
                 break;
 
                 case "save":
@@ -88,8 +94,18 @@ public class MavenApp1 {
                 case "exit":
                 break mainloop;
 
+                case "quit":
+                break mainloop;
+
                 default:
-                System.out.println("Invalid Input. Try again");
+                System.out.println("Invalid Input. Try again. Available commands:");
+                System.out.println("login <user>");
+                System.out.println("add <item1>, <item2>, <item3>, <etc>");
+                System.out.println("list");
+                System.out.println("delete <item index>");
+                System.out.println("save");
+                System.out.println("users");
+                System.out.println("exit");
                 break;
             }
         }

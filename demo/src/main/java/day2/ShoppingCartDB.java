@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class ShoppingCartDB {
-    Boolean isLoggedIn = false;
+    private Boolean isLoggedIn = false;
     String user = "";
     
    
@@ -45,7 +45,6 @@ public class ShoppingCartDB {
             return;
         }
         System.out.println("User is " + user);
-        System.out.println("dir is " + dir);
         System.out.println("Saving to " + dir + "\\" + user + ".db");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(dir + "\\" + user + ".db"))) {
             String[] fldr = dir.split("\\\\");
@@ -61,9 +60,14 @@ public class ShoppingCartDB {
 
     public void users(String dir) {
         File[] files = new File(dir).listFiles();
+        System.out.println("User list:");
         for (File file: files) {
             String fname = file.getName(); 
-            System.out.println(fname);
+            String f2 = fname.replaceFirst("[.][^.]+$", "");
+            System.out.println(f2);
+
+
+        
         }
 
     }
